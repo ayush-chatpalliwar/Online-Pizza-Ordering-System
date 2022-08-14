@@ -1,0 +1,127 @@
+﻿@model PizzaApplication.ViewModels.PizzaViewModel
+
+@{
+    ViewData["Title"] = "AddPizza";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<script>
+    document.getElementById("addpizza").classList.add("active");
+</script>
+
+
+<div id="contact" class="section db">
+    <div class="container-fluid">
+        <div class="section-title text-center">
+            <h3>Add Pizza</h3>
+        </div><!-- end title -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact_form">
+                    <div id="message"></div>
+                    <form id="contactForm" method="post" action="/OnlinePizza/AddPizza" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="Name" id="name" type="text" placeholder="Pizza Name" required="required" data-validation-required-message="Please enter your name.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="Price" id="price" type="text" placeholder="Price" pattern="[0-9]+" required="required" data-validation-required-message="Please enter your Price.">
+
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control" style="height:55px;" name="Category" id="category" type="text" placeholder="Category" required="required" data-validation-required-message="Please select your category.">
+                                        <option value="">--Select Category--</option>
+                                        <option value="Veg">Veg</option>
+                                        <option value="Non-Veg">Non-Veg</option>
+                                    </select>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" id="toppings" name="Toppings" type="text" placeholder="Toppings" required="required" data-validation-required-message="Please enter Toppings.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6" style="margin-left:200px;">
+                                <div class="form-group">
+                                    <input class="form-control" id="image" name="Image" type="file" placeholder="Image" required="required" data-validation-required-message="Please select Image.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button id="sendMessageButton" class="sim-btn hvr-radial-in" data-text="Send Message" type="submit">Submit</button>
+                            </div>
+
+                            <div style="color:red; font-weight: bold; font-size:25px; margin-top:20px;" class="col-lg-12 text-center">
+                                @ViewBag.Message
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->
+<!--<h1>AddPizza</h1>
+
+<h4>Pizza</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddPizza" method="post" action="/OnlinePizza/AddPizza" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"> Name </label>
+                <input asp-for="Name" name="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price</label>
+                <input asp-for="Price" name="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label">Category</label>
+                <input asp-for="Category" name="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Toppings" class="control-label">Toppings</label>
+                <input asp-for="Toppings" name="Toppings" class="form-control" />
+                <span asp-validation-for="Toppings" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Image</label>-->
+@*<input asp-for="Image" class="form-control" />*@
+<!--<input type="file" class="form-control-file" asp-for="Image" name="Image" id="Image" onchange="fileCheck(this);">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>-->

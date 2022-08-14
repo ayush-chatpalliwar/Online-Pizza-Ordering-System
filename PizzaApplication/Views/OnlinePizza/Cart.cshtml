@@ -1,0 +1,260 @@
+﻿@model IEnumerable<PizzaApplication.ViewModels.CartViewModel>
+
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    var userid = ViewBag.UserId;
+    int total = 0;
+}
+<script>
+    document.getElementById("cart").classList.add("active");
+
+
+    @foreach (var item in Model)
+    {
+        total = total + item.Price;
+    }
+
+    jQuery(function ($) {
+        $('#price').text('Sub Total - ' + '@total');
+
+    });
+
+    function Quantity() {
+
+        var l = $('.Qty').length;
+        //var p = $('.pr').length;
+        //Initialize default array
+        var result = [];
+        var result2 = document.getElementsByClassName("pr");
+        for (i = 0; i < l; i++) {
+            //Push each element to the array
+            result.push($('.Qty').eq(i).val());
+            //result2.push($('.pr').eq(i).val());
+        }
+        var z=0;
+        for (i = 0; i < result.length; i++) {
+            var x = parseInt(result[i]);
+            var y = parseInt(result2[i].innerHTML);
+            z = z+x * y;
+            //alert(result[i] + '  ' + result2[i].innerHTML);
+            $('#price').text('Sub Total - '+z);
+        }
+
+
+    }
+
+    var Pizza = {
+        Quantity: [],
+        payment: " ",
+        UserId: 0,
+        Total:0
+    }
+
+    function BuyAllPizza() {
+
+        var l = $('.Qty').length;
+        //var p = $('.pr').length;
+        //Initialize default array
+        var result = [];
+        var result2 = document.getElementsByClassName("pr");
+        for (i = 0; i < l; i++) {
+            //Push each element to the array
+            result.push($('.Qty').eq(i).val());
+            //result2.push($('.pr').eq(i).val());
+        }
+        var z = 0;
+        for (i = 0; i < result.length; i++) {
+            var x = parseInt(result[i]);
+            var y = parseInt(result2[i].innerHTML);
+            z = z + x * y;
+            //alert(result[i] + '  ' + result2[i].innerHTML);
+            //$('#price').text('Sub Total - ' + z);
+        }
+
+        var options = {};
+        options.url = "/api/cart";
+        options.type = "PATCH";
+        var obj = Pizza;
+        obj.Quantity = result;
+        obj.payment = $("#pay").val();
+        obj.UserId = @userid;
+        obj.Total = z;
+         
+        console.dir(obj);
+        options.data = JSON.stringify(obj);
+        options.contentType = "application/json";
+        options.dataType = "html";
+
+        options.success = function (msg) {
+            Alert.render(msg, '/OnlinePizza/Home');
+            //alert('Order Placed Sucessfully');
+            //window.location.href = '/OnlinePizza/Home';
+        },
+            options.error = function () {
+                $("#msg").html("Error while calling the Web API!");
+            };
+        $.ajax(options);
+    }
+
+    function RemovePizza(id) {
+        var options = {};
+        options.url = "/api/cart/"
+            + id;
+        options.type = "DELETE";
+        options.dataType = "html";
+        options.success = function (msg) {
+            Alert.render(msg, '/OnlinePizza/Cart');
+            //window.location.href = '/OnlinePizza/Cart';
+            //console.log('msg= ' + msg);
+            //$("#msg").html(msg);
+            //getEmployeeList();
+
+        };
+        options.error = function () {
+            $("#msg").html("Error while calling the Web API!");
+        };
+        $.ajax(options);
+    }
+
+
+</script>
+
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #8dbd56;
+            color: white;
+            font-size: 24px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        #customers td {
+            font-size: 20px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    /*.button {
+        background-color: #866ec7;
+        border: none;
+        color: white;
+        padding: 4px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        justify-content: flex-end;
+    }*/
+</style>
+
+
+<center>
+    <h1>Cart</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div style="padding-left:100px; padding-right:100px; padding-bottom:100px;">
+        <table class="table" id="customers">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PizzaImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PizzaName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Remove")
+                         
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <img src="~/Images/@item.PizzaImage" width="100" style="height:50px;" class="img-fluid" alt="post-img" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PizzaName)
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control Qty" onclick="Quantity()" value="@item.Quantity" style="width:80px; margin:auto; display:block;" min="1" name="Quantity" id="qty" type="number" placeholder="1" required="required">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </td>
+                    <td>
+                        <h4 class="pr">@item.Price</h4>
+                    </td>
+                    <td style="vertical-align:middle; text-align:center;">
+                     <button id="sendMessageButton" onclick="RemovePizza(@item.PizzaId)" class="sim-btn hvr-radial-in" style="margin-left:20px;" data-text="Send Message" type="submit">Remove</button>
+
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <h2 id="price">Sub Total </h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" style="height:55px;" name="Payment" id="pay" type="text" placeholder="Category" required="required" data-validation-required-message="Please select your category.">
+                            <option value="">--Select Payment Method--</option>
+                            <option value="Debit Card">Debit Card</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Cash On Delivery">Cash On Delivery</option>
+                        </select>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 text-center">
+                <div id="success"></div>
+                <button id="sendMessageButton" onclick="BuyAllPizza()" class="sim-btn hvr-radial-in" style="margin-left:20px;" data-text="Send Message" type="submit">Buy Now</button>
+            </div>
+
+        </div>
+</center>

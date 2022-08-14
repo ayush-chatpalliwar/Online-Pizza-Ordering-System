@@ -1,0 +1,150 @@
+﻿@model IEnumerable<PizzaApplication.ViewModels.OrderDisplayViewModel>
+
+@{
+    ViewData["Title"] = "MyOrders";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<script>
+    document.getElementById("myorders").classList.add("active");
+</script>
+
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #8dbd56;
+            color: white;
+            font-size: 24px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        #customers td {
+            font-size: 20px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    /*.button {
+        background-color: #866ec7;
+        border: none;
+        color: white;
+        padding: 4px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        justify-content: flex-end;
+    }*/
+    .brlarge {
+        display: block;
+        margin-bottom: 1.5em;
+    }
+</style>
+
+
+<center>
+    <h1>My Orders</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div style="padding-left:100px; padding-right:100px; padding-bottom:100px;">
+        <table class="table" id="customers">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PizzaImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PizzaName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="vertical-align:middle; text-align:center;">
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td style="vertical-align:middle; text-align:center;">
+                            @foreach (var image in item.PizzaImage)
+                            {
+                                <img src="~/Images/@image" width="100" style="height:50px;" class="img-fluid" alt="post-img" />
+                                <span class="brlarge"></span>
+                            }
+                        </td>
+                        <td style="vertical-align:middle; text-align:center;">
+                            @foreach (var name in item.PizzaName)
+                            {
+                                
+                                @Html.DisplayFor(modelItem => name)
+                                <span class="brlarge"></span>
+                                 
+                            }
+                        </td>
+
+                        <td style="vertical-align:middle; text-align:center;">
+                            @foreach (var qty in item.Quantity)
+                            {
+                                @Html.DisplayFor(modelItem => qty)
+                                <span class="brlarge"></span>
+                            }
+                        </td>
+                        <td style="vertical-align:middle; text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+
+                        <td style="vertical-align:middle; text-align:center;">
+                            @item.Date.ToString("dd/MM/yyyy")
+                        </td>
+
+                        <td style="vertical-align:middle; text-align:center;">
+                            <a href="/OnlinePizza/SendFeedback/@item.OrderNo" class="sim-btn hvr-radial-in">Feedback</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+</center>

@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var feedback = ViewBag.message;
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script>
+    document.getElementById("feedbacks").classList.add("active");
+</script>
+
+<div id="contact" class="section db">
+    <div class="container-fluid">
+        <div class="section-title text-center">
+            <h3>Feedback</h3>
+        </div><!-- end title -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact_form">
+                    <div id="message"></div>
+                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <h2 style="color:black;">Title :</h2>
+
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="section-title">
+                                    <h4>@feedback.Title</h4>
+                                </div><!-- end title -->
+                            </div>
+                            <div class="col-md-12" style="margin-top:-50px;">
+
+                                <h2 style="color:black;">Description :</h2>
+
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="section-title">
+                                    <h4>@feedback.Description</h4>
+                                </div><!-- end title -->
+                            </div>
+
+                            <div class="col-md-6" style="margin-top:-50px;">
+
+                                <h2 style="color:black;">Feedback By :</h2>
+
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="section-title">
+                                    <h4> @feedback.UserName</h4>
+                                </div><!-- end title -->
+                            </div>
+
+                            <div class="col-md-6" style="margin-top:-50px;">
+
+                                <h2 style="color:black;">Order No :</h2>
+
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="section-title">
+                                    <h4>@feedback.OrderNo</h4>
+                                </div><!-- end title -->
+                            </div>
+
+                            <div class="col-md-6" style="margin-top:-50px;">
+
+                                <h2 style="color:black;">Date :</h2>
+
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="section-title">
+                                    <h4>@feedback.Date.ToString("dd/MM/yyyy")</h4>
+                                </div><!-- end title -->
+                            </div>
+
+
+                            <!-- <div class="clearfix"></div> -->
+                            <!-- <div class="col-lg-12 text-center"> -->
+                            <!-- <div id="success"></div> -->
+                            <!-- <button id="sendMessageButton" class="sim-btn hvr-radial-in" data-text="Send Feedback" type="submit">Send Feedback</button> -->
+                            <!-- </div> -->
+                        </div>
+                    </form>
+                </div>
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->

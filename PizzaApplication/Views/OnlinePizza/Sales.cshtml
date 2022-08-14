@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <script>
+        document.getElementById("sales").classList.add("active");
+
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+	    text: "Orders Trends By Date"
+	},
+	toolTip: {
+		shared: true
+	},
+	data: [{
+		type: "line",
+		name: "Sales",
+		showInLegend: true,
+		dataPoints: @Html.Raw(ViewBag.DataPoints),
+	}]
+});
+chart.render();
+
+}
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 550px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>                  

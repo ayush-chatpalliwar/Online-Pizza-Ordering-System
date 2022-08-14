@@ -1,0 +1,86 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var pizza = ViewBag.Message;
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int i = 0;
+ }
+
+
+<script>
+    document.getElementById("menu").classList.add("active");
+
+
+    function DeletePizza(id) {
+        var options = {};
+        options.url = "/api/pizza/"
+            + id;
+        options.type = "DELETE";
+        options.dataType = "html";
+        options.success = function (msg) {
+            Alert.render(msg, '/OnlinePizza/Menu');
+            //window.location.href = '/OnlinePizza/Menu';
+            //console.log('msg= ' + msg);
+            //$("#msg").html(msg);
+            //getEmployeeList();
+
+        };
+        options.error = function () {
+            $("#msg").html("Error while calling the Web API!");
+        };
+        $.ajax(options);
+    }
+
+
+
+    </script>
+
+<div id="blog" class="section wb">
+    <div class="container-fluid">
+
+        <div class="row">
+            @foreach (var item in pizza)
+            {
+
+                if (i > 0 && i % 3 == 0)
+                {
+                @:</div><hr><div class="row">
+                    // close and start new row
+                }
+                <div class="col-md-4 col-sm-6 col-lg-4">
+                    <div class="post-box">
+                        <div class="post-thumb">
+                            <img src="~/Images/@item.Image" width="400" style="height:250px;" class="img-fluid" alt="post-img" />
+                            <div class="date">
+                                <span>Price - </span>
+                                <span>@item.Price</span>
+
+                            </div>
+                        </div>
+                         
+                        <div class="post-info" style="text-align:center; font-weight: bold;color:black;">
+                            <h4 style="margin-top:-30px;">@item.Name</h4>
+                            <p> Category - @item.Category</p>
+                            <p style="margin-top:-20px;"> Toppings - @item.Toppings</p>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                 <a href="/OnlinePizza/UpdatePizza/@item.PizzaId" class="sim-btn hvr-radial-in">Update</a>
+                                <button id="sendMessageButton" onclick="DeletePizza(@item.PizzaId)" class="sim-btn hvr-radial-in" style="margin-left:20px;" data-text="Send Message" type="submit">Delete</button>
+                            </div>
+                             
+                        </div>
+                             
+                      </div>
+                </div>
+
+                i = i + 1;
+
+            }
+        </div>
+
+
+    </div>
+
+    </div>
+

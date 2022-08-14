@@ -1,0 +1,287 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null; /*"~/Views/Shared/AdminLayout.cshtml";*/
+}
+
+<script>
+
+    function checkPassword(form) {
+        password1 = form.Password.value;
+        password2 = form.conpass.value;
+
+        // If password not entered
+        //if (password1 == '')
+        //alert ("Please enter Password");
+
+        // If confirm password not entered
+        //else if (password2 == '')
+        //alert ("Please enter confirm password");
+
+        // If Not same return False.
+        if (password1 != password2) {
+            alert("\nPassword did not match: Please try again...")
+            return false;
+        }
+
+
+    }
+
+
+    //$(document).ready(function () {
+
+    //    $("#subButton").click(function () {
+    //        password1 = $("#password").val();
+    //        password2 = $("#conpassword").val();
+    //        Name = $("#name").val();
+    //        Email = $("#email").val();
+    //        Phone = $("#phone").val();
+    //        Address = $("#address").val();
+
+    //        if (Name != '' && Email != '' && password1 != '' && Phone != '' && Address != '') {
+
+
+    //            if (password1 != '' && password1 == password2) {
+    //                AddUser();
+    //                window.location.href = '/OnlinePizza/Menu';
+    //                //alert("\nPassword Matched");
+    //                //return false;
+    //            }
+
+    //            else {
+    //                alert("\Password Did Not Matched");
+    //                // return false;
+    //            }
+    //        }
+    //        else {
+    //            alert("\Please Fill All Fileds");
+    //        }
+    //    });
+
+    //});
+
+    //var User = {
+    //    UserId:0,
+    //    Name: "",
+    //    Email: "",
+    //    Password: "",
+    //    Phone: 0,
+    //    Address: "",
+    //    Date: "",
+    //    Role: ""
+    //}
+
+    //function AddUser() {
+    //    //alert("In add user");
+    //    var options = {};
+    //    options.url = "/api/user";
+    //    options.type = "POST";
+    //    var obj = User;
+    //    obj.Name = $("#name").val();
+    //    obj.Email = $("#email").val();
+    //    obj.Password = $("#password").val();
+    //    obj.Phone = $("#phone").val();
+    //    obj.Address = $("#address").val();
+    //    obj.Date = new Date();
+    //    obj.Role = "User";
+
+    //    console.dir(obj);
+    //    options.data = JSON.stringify(obj);
+    //    options.contentType = "application/json";
+    //    options.dataType = "html";
+
+    //    options.success = function (msg) {
+    //        window.location.href = '/OnlinePizza/Menu';
+    //    };
+    //        options.error = function () {
+    //            //$("#msg").html("Error while calling the Web API!");
+    //        };
+    //    $.ajax(options);
+    //}
+
+
+
+
+
+    //function AddUser() {
+    //    $.ajax({
+    //        type: "POST",
+    //        contentType: "application/json;charset=utf-8",
+    //        url: "/api/User/",
+    //        data: JSON.stringify({
+    //            //UserId: $("UserId").val(),
+    //            Name: $("#name").val(),
+    //            Email: $("#email").val(),
+    //            Password: $("#password").val(),
+    //            Phone: $("#phone").val(),
+    //            Address: $("#address").val(),
+    //            Date: new Date()
+    //        }),
+    //        dataType: "JSON",
+    //        success: function (data) {
+    //            window.location.href = '/OnlinePizza/Menu';
+    //        }
+    //    });
+    //}
+
+
+    //function checkPassword(form) {
+    //    password1 = form.Password.value;
+    //    password2 = form.conpass.value;
+
+    //    if (password1 != password2) {
+    //        alert("\nPassword did not match: Please try again...")
+    //        return false;
+    //    }
+
+    //    else {
+    //        alert("\Password Matched")
+    //        return false;
+    //    }
+
+    //}
+</script>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Site Metas -->
+    <title>Online Pizza</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    @*<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">*@
+
+    <!-- Bootstrap CSS -->
+
+    <link href="~/Effects/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Site CSS -->
+
+    <link href="~/Effects/style.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+
+    <link href="~/Effects/css/responsive.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+
+    <link href="~/Effects/css/custom.css" rel="stylesheet" />
+
+    <script src="~/Effects/js/modernizr.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+
+
+</head>
+<body id="page-top" class="politics_version">
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <img class="img-fluid" src="images/logo.png" alt="" />
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger active" id="home" href="/OnlinePizza/Login"><span>Login</span></a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div id="contact" class="section db">
+        <div class="container-fluid">
+            <div class="section-title text-center">
+                <h3>Registration</h3>
+            </div><!-- end title -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact_form">
+                        <div id="message"></div>
+                        <form id="contactForm" method="post" action="/OnlinePizza/AddUser" onSubmit="return checkPassword(this)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="name" name="Name" type="text" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="email" name="Email" type="email" placeholder="Your Email" required="required" pattern=".+" @@"globex.com" data-validation-required-message="Please enter your email address.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="password" name="Password" type="password" placeholder="Enter Password" required="required" data-validation-required-message="Please enter your password.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="conpassword" name="conpass" type="password" placeholder="Confirm Password" required="required" data-validation-required-message="Please enter your confirmed password.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="phone" name="Phone" type="text" maxlength="10" pattern="[1-9]{1}[0-9]{9}" placeholder="Phone Number" required="required" data-validation-required-message="Please enter phone number.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="address" name="Address" type="text" placeholder="Address" required="required" data-validation-required-message="Please enter your address.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="col-lg-12 text-center">
+                                    <div id="success"></div>
+                                    <button class="sim-btn hvr-radial-in" data-text="Send Message" type="submit">Submit</button>
+                                </div>
+
+                                <div style="color:red; font-weight: bold; font-size:25px; margin-top:20px;" class="col-lg-12 text-center">
+                                    @ViewBag.Message
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+</body>
+</html>

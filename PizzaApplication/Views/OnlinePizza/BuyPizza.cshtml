@@ -1,0 +1,153 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var pizza = ViewBag.Message;
+    var userid = ViewBag.UserId;
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    int i = 0;
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    document.getElementById("home").classList.add("active");
+
+    jQuery(function ($) {
+        $('#price').text('Total - ' + '@pizza.Price');
+
+        $('#qty').on('input', function () {
+            var price = parseInt($('#qty').val());
+            price = price*@pizza.Price;
+            $('#price').text('Total - ' + price);
+        });
+    });
+
+    var Pizza = {
+        OrderId: 0,
+        UserId: 0,
+        PizzaId: 0,
+        Quantity: 0,
+        Price: 0,
+        PaymentMethod: "",
+        Date: "",
+        OrderNo: 0
+    }
+
+
+    function BuyPizza() {
+        var options = {};
+        options.url = "/api/order";
+        options.type = "POST";
+        var obj = Pizza;
+        obj.OrderId = 0;
+        obj.UserId = @userid;
+        obj.PizzaId = @pizza.PizzaId;
+        obj.Quantity = $("#qty").val();
+        obj.Price =  @pizza.Price;
+        obj.PaymentMethod = $("#payment").val();
+        obj.Date = new Date();
+        obj.OrderNo = 0;
+
+        console.dir(obj);
+        options.data = JSON.stringify(obj);
+        options.contentType = "application/json";
+        options.dataType = "html";
+
+        options.success = function (msg) {
+            Alert.render(msg, '/OnlinePizza/Home');
+            //window.location.href = '/OnlinePizza/Home';
+        },
+            options.error = function () {
+                $("#msg").html("Error while calling the Web API!");
+            };
+        $.ajax(options);
+    }
+</script>
+
+
+
+<div id="blog" class="section wb" style="margin-top:50px;">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-lg-4">
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="post-box">
+                    <div class="post-thumb">
+                        <img src="~/Images/@pizza.Image" width="400" style="height:250px;" class="img-fluid" alt="post-img" />
+                        <div class="date">
+                            <span>Price - </span>
+                            <span>@pizza.Price</span>
+
+                        </div>
+                    </div>
+
+                    <div class="post-info" style="text-align:center; font-weight: bold;color:black;">
+                        <h4 style="margin-top:-30px;">@pizza.Name</h4>
+                        <p> Category - @pizza.Category</p>
+                        <p style="margin-top:-20px;"> Toppings - @pizza.Toppings</p>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+
+
+                            <div class="row">
+                                <div class="col-md-6" style="justify-self:right;">
+                                    <h4>Quantity</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" value="1" style="width:80px; margin:auto; display:block;" min="1" name="Quantity" id="qty" type="number" placeholder="1" required="required">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select class="form-control" style="height:55px;" name="Payment" id="payment" type="text" placeholder="Category" required="required" data-validation-required-message="Please select your category.">
+                                        <option value="">--Select Payment Method--</option>
+                                        <option value="Debit Card">Debit Card</option>
+                                        <option value="Credit Card">Credit Card</option>
+                                        <option value="Cash On Delivery">Cash On Delivery</option>
+                                    </select>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h4 id="price">Total - @pizza.Price</h4>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button id="sendMessageButton" onclick="BuyPizza()" class="sim-btn hvr-radial-in" style="margin-left:20px;" data-text="Send Message" type="button">Buy Now</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+

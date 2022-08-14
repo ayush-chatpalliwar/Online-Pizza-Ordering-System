@@ -1,0 +1,147 @@
+﻿@model IEnumerable<PizzaApplication.ViewModels.FeedbackViewModel>
+
+@{
+    ViewData["Title"] = "AllFeedbacks";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script>
+    document.getElementById("feedbacks").classList.add("active");
+    $(document).ready(function () {
+        $('#customers').DataTable();
+    });
+</script>
+
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            /*                    text-align: left;*/
+            background-color: #8dbd56;
+            color: white;
+            font-size: 24px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        #customers td {
+            font-size: 20px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    /*.button {
+            background-color: #866ec7;
+            border: none;
+            color: white;
+            padding: 4px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            justify-content: flex-end;
+        }*/
+    .brlarge {
+        display: block;
+        margin-bottom: 1.5em;
+    }
+</style>
+
+<center>
+    @*<h1>AllFeedbacks</h1>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>*@
+    <div style="padding-left:100px; padding-right:100px; padding-bottom:100px;">
+
+        <table class="table" id="customers">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FeedbackId)
+                    </th>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+
+                    <th>@Html.DisplayName("View")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FeedbackId)
+                    </td>
+                    @if (item.OrderNo == 0)
+                    {
+                        <td>
+                            @Html.DisplayName("General")
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+
+                    <td>
+                        @item.Date.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        <a href="/OnlinePizza/ViewFeedback/@item.FeedbackId" class="sim-btn hvr-radial-in">View</a>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</center>
